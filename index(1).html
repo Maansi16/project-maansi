@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Ranker</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    /* Existing styles go here */
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8; /* Light blue-gray background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50; /* Dark blue-gray */
+      font-size: 2.5em; /* Larger font size */
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2980b9; /* Bright blue */
+      font-size: 2em; /* Larger font size */
+      margin-top: 30px;
+    }
+
+    form {
+      margin-bottom: 50px;
+      text-align: center;
+      background-color: #ffffff; /* White background for form */
+      padding: 30px;
+      border-radius: 20px; /* More rounded corners */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    form:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    }
+
+    input[type="file"], textarea, button {
+      margin: 10px;
+      padding: 12px;
+      border-radius: 8px; /* More rounded corners */
+      border: 1px solid #ced4da; /* Light gray border */
+      width: calc(100% - 24px); /* Full width minus padding */
+      font-size: 1em; /* Consistent font size */
+    }
+
+    input[type="file"] {
+      background-color: #e9ecef; /* Light gray input background */
+      color: #495057; /* Dark gray text */
+    }
+
+    textarea {
+      background-color: #e9ecef; /* Light gray input background */
+      color: #495057; /* Dark gray text */
+      height: 120px; /* Slightly taller */
+    }
+
+    button {
+      background-color: #3498db; /* Bright blue */
+      color: white; /* White text */
+      border: none;
+      cursor: pointer;
+      font-size: 1.1em; /* Slightly larger font size */
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9; /* Darker blue on hover */
+    }
+
+    ol {
+      background: #ffffff; /* White background for list */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%; /* Full width */
+      max-width: 600px; /* Max width for the list */
+    }
+
+    li {
+      margin: 10px 0;
+      color: #34495e; /* Dark gray text for list items */
+      font-size: 1.1em; /* Slightly larger font size */
+    }
+  </style>
+</head>
+<body>
+  <h1>AI-Powered Resume Ranker</h1>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="resumes" multiple required>
+    <br><br>
+    <textarea name="job_description" placeholder="Enter Job Description" required></textarea>
+    <br>
+    <button type="submit">Upload & Rank Resumes</button>
+  </form>
+  {% if resumes %}
+    <h2>Ranked Resumes</h2>
+    <ol>
+      {% for filename, score in resumes %}
+        <li>{{ filename }} - Score: {{ '%.2f' | format(score) }}</li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+</body>
+</html>

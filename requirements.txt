@@ -1,0 +1,5 @@
+flask
+scikit-learn
+pdfplumber
+spacy==3.5.3
+numpy==1.23.5
